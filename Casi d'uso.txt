@@ -1,5 +1,0 @@
-casi d'uso:
-- utente si registra
-- utente noleggia una bici
-- utente deposita una bici
-- utente verifica la disponibilità delle bici
