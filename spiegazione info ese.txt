@@ -1,0 +1,31 @@
+web service (sistema centrale, server, fa i calcoli)
+	- monitoraggio servizio
+	- controllo servizio
+	- tariffazione servizio (funzione che calcola quanto pagare in base ai km percorsi)
+	
+	
+cliente registrato
+	- visualizzazione riepilogo (!= rispetto a quella dell'admin)
+
+
+admin
+- monitoraggio
+- stampe riepilogo
+	- stampa operazioni x user
+	- stampa operazioni x stazione
+	- stampa bici che devono fare manutenzione (hanno superato tot km)
+		- segnare i m fatti ogni 10 sec (ipotizziamo una velocità di 12km/h -> 3.3m/s, quindi ogni 10 sec si fa 33m)
+			- pensare al peso dei log (in questo caso questi non occupano troppo, circa 75MB l'anno)
+	
+- bici non riconsegnate (con la loro ultima posizione rilevata)
+	- caricare il gps in diversi modi
+		- con una dynamo
+		- quando si deposita la bici, la stazione lo ricarica
+
+- gps
+	- capire quanti km ha fatto per la manutenzione
+	- posizione in tempo reale è un dato sensibile, bisogna garantire che sia sicuro
+		- quindi non salviamo la posizione, la usiamo solo per fare un calcolo nel server (fini statistici x la manutenzione)
+
+
+manca use case
