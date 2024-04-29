@@ -26,8 +26,3 @@ admin
 	- capire quanti km ha fatto per la manutenzione
 	- posizione in tempo reale è un dato sensibile, bisogna garantire che sia sicuro
 		- quindi non salviamo la posizione, la usiamo solo per fare un calcolo nel server (fini statistici x la manutenzione)
-
-TODO
-- manca use case
-- associazione noleggia, aggiungere anche la stazione così si capisce chi l'ha noleggiata e dove (la stazione sia quella dalla quale viene presa
-sia quella in cui viene consegnata)
