@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Login Cliente</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../JS/login.js"></script>
+        <script>
+            $("document").ready(function(){
+                $("#accedi").click(function(){
+                    loginCliente();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <label for="email">email: </label>
+        <input type="text" id="email"><br>
+
+        <label for="password">password: </label>
+        <input type="password" id="password"><br>
+        <button id="accedi">accedi</button><br>
+    </body>
+</html>

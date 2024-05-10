@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 29, 2024 at 05:23 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: 127.0.0.1
+-- Creato il: Mag 10, 2024 alle 09:08
+-- Versione del server: 10.4.32-MariaDB
+-- Versione PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,200 +24,237 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bici`
+-- Struttura della tabella `admin`
+--
+
+CREATE TABLE `admin` (
+  `ID` int(11) NOT NULL,
+  `nome` varchar(16) NOT NULL,
+  `cognome` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `password` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `admin`
+--
+
+INSERT INTO `admin` (`ID`, `nome`, `cognome`, `email`, `password`) VALUES
+(2, 'Admin', 'Admin', 'admin@example.com', 'password123');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `bici`
 --
 
 CREATE TABLE `bici` (
   `ID` int(11) NOT NULL,
-  `km_percorsi` int(11) NOT NULL DEFAULT 0,
   `disponibile` tinyint(1) NOT NULL DEFAULT 1,
+  `RFID` char(4) NOT NULL,
+  `gps` char(4) NOT NULL,
+  `km_percorsi` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `bici`
+--
+
+INSERT INTO `bici` (`ID`, `disponibile`, `RFID`, `gps`, `km_percorsi`) VALUES
+(5, 1, '1234', 'GPS1', 0),
+(6, 1, '5678', 'GPS2', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `ID` int(11) NOT NULL,
+  `nome` varchar(16) NOT NULL,
+  `cognome` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `num_carta_credito` char(16) DEFAULT NULL,
+  `num_tessera` char(8) NOT NULL,
+  `idIndirizzo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `cliente`
+--
+
+INSERT INTO `cliente` (`ID`, `nome`, `cognome`, `email`, `password`, `num_carta_credito`, `num_tessera`, `idIndirizzo`) VALUES
+(2, 'Mario', 'Rossi', 'mario@example.com', 'mario123', NULL, '12345678', 1),
+(3, 'Luigi', 'Verdi', 'luigi@example.com', 'luigi123', NULL, '87654321', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `indirizzo`
+--
+
+CREATE TABLE `indirizzo` (
+  `ID` int(11) NOT NULL,
+  `via` varchar(32) NOT NULL,
+  `citta` varchar(64) NOT NULL,
+  `cap` char(5) NOT NULL,
+  `num_civico` varchar(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `indirizzo`
+--
+
+INSERT INTO `indirizzo` (`ID`, `via`, `citta`, `cap`, `num_civico`) VALUES
+(1, 'Via Roma', 'Roma', '00100', '123'),
+(2, 'Via Milano', 'Milano', '20100', '456');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `operazione`
+--
+
+CREATE TABLE `operazione` (
+  `ID` int(11) NOT NULL,
+  `tipo` enum('noleggio','deposito','','') NOT NULL,
+  `data_ora` datetime NOT NULL,
+  `distanza_percorsa` int(11) DEFAULT NULL,
+  `idCliente` int(11) NOT NULL,
+  `idBici` int(11) NOT NULL,
   `idStazione` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `carta_credito`
---
-
-CREATE TABLE `carta_credito` (
-  `ID` int(11) NOT NULL,
-  `numero` char(16) NOT NULL,
-  `cvv` char(3) NOT NULL,
-  `data_scadenza` date NOT NULL,
-  `nome` varchar(16) NOT NULL,
-  `cognome` varchar(32) NOT NULL,
-  `idUtente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `indirizzo`
---
-
-CREATE TABLE `indirizzo` (
-  `ID` int(11) NOT NULL,
-  `via` varchar(16) NOT NULL,
-  `citta` varchar(16) NOT NULL,
-  `cap` varchar(6) NOT NULL,
-  `num_civico` varchar(4) NOT NULL,
-  `idUtente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `smart-card`
---
-
-CREATE TABLE `smart-card` (
-  `ID` int(11) NOT NULL,
-  `codice_utente` varchar(32) NOT NULL,
-  `idUtente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stazione`
+-- Struttura della tabella `stazione`
 --
 
 CREATE TABLE `stazione` (
   `ID` int(11) NOT NULL,
   `latitudine` varchar(10) NOT NULL,
   `longitudine` varchar(11) NOT NULL,
-  `num_slot_tot` int(11) NOT NULL DEFAULT 50,
-  `num_bici_disp` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `utente`
---
-
-CREATE TABLE `utente` (
-  `ID` int(11) NOT NULL,
-  `username` varchar(16) NOT NULL,
-  `email` varchar(64) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `isAdmin` tinyint(1) NOT NULL DEFAULT 0
+  `num_bici_disp` int(11) NOT NULL DEFAULT 50,
+  `num_slot_tot` int(11) NOT NULL DEFAULT 50
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indexes for dumped tables
+-- Dump dei dati per la tabella `stazione`
+--
+
+INSERT INTO `stazione` (`ID`, `latitudine`, `longitudine`, `num_bici_disp`, `num_slot_tot`) VALUES
+(1, '41.9028', '12.4964', 30, 50),
+(2, '45.4642', '9.1900', 25, 40);
+
+--
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `bici`
+-- Indici per le tabelle `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indici per le tabelle `bici`
 --
 ALTER TABLE `bici`
   ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RFID` (`RFID`),
+  ADD UNIQUE KEY `gps` (`gps`);
+
+--
+-- Indici per le tabelle `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `num_tessera` (`num_tessera`),
+  ADD KEY `id_indirizzo` (`idIndirizzo`);
+
+--
+-- Indici per le tabelle `indirizzo`
+--
+ALTER TABLE `indirizzo`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indici per le tabelle `operazione`
+--
+ALTER TABLE `operazione`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `idCliente` (`idCliente`,`idBici`,`idStazione`),
+  ADD KEY `idBici` (`idBici`),
   ADD KEY `idStazione` (`idStazione`);
 
 --
--- Indexes for table `carta_credito`
---
-ALTER TABLE `carta_credito`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `idUtente` (`idUtente`);
-
---
--- Indexes for table `indirizzo`
---
-ALTER TABLE `indirizzo`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `idUtente` (`idUtente`);
-
---
--- Indexes for table `smart-card`
---
-ALTER TABLE `smart-card`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `idUtente` (`idUtente`);
-
---
--- Indexes for table `stazione`
+-- Indici per le tabelle `stazione`
 --
 ALTER TABLE `stazione`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `utente`
---
-ALTER TABLE `utente`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT for table `bici`
+-- AUTO_INCREMENT per la tabella `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `bici`
 --
 ALTER TABLE `bici`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `carta_credito`
+-- AUTO_INCREMENT per la tabella `cliente`
 --
-ALTER TABLE `carta_credito`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cliente`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `indirizzo`
+-- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `operazione`
+--
+ALTER TABLE `operazione`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `smart-card`
---
-ALTER TABLE `smart-card`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `stazione`
+-- AUTO_INCREMENT per la tabella `stazione`
 --
 ALTER TABLE `stazione`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `utente`
---
-ALTER TABLE `utente`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
+-- Limiti per le tabelle scaricate
 --
 
 --
--- Constraints for table `bici`
+-- Limiti per la tabella `cliente`
 --
-ALTER TABLE `bici`
-  ADD CONSTRAINT `bici_ibfk_1` FOREIGN KEY (`idStazione`) REFERENCES `stazione` (`ID`);
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`idIndirizzo`) REFERENCES `indirizzo` (`ID`);
 
 --
--- Constraints for table `carta_credito`
+-- Limiti per la tabella `operazione`
 --
-ALTER TABLE `carta_credito`
-  ADD CONSTRAINT `carta_credito_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `indirizzo`
---
-ALTER TABLE `indirizzo`
-  ADD CONSTRAINT `indirizzo_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `smart-card`
---
-ALTER TABLE `smart-card`
-  ADD CONSTRAINT `smart-card_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `operazione`
+  ADD CONSTRAINT `operazione_ibfk_1` FOREIGN KEY (`idBici`) REFERENCES `bici` (`ID`),
+  ADD CONSTRAINT `operazione_ibfk_2` FOREIGN KEY (`idStazione`) REFERENCES `stazione` (`ID`),
+  ADD CONSTRAINT `operazione_ibfk_3` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

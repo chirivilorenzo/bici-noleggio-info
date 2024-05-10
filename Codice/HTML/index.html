@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Home</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+            $("document").ready(function(){
+                $("#loginC").click(function(){
+                    window.location.href = "loginCliente.html";
+                });
+
+                $("#loginA").click(function(){
+                    window.location.href = "loginAdmin.html";
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <button id="loginC">login cliente</button><br>
+        <button id="loginA">login admin</button><br>
+    </body>
+</html>
