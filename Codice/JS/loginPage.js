@@ -9,7 +9,7 @@ function loginCliente(){
         data: {email: email, password: password},
         success: function(response){
             if(response["status"] == "success"){
-                window.location.href = "paginaUtente.html";
+                window.location.href = "../HTML/mappa.html";
             }
             else if(response["status"] == "error"){
                 alert(response["code"] + ": " + response["message"]);
@@ -36,7 +36,7 @@ function loginAdmin(){
         data: {email: email, password: password},
         success: function(response){
             if(response["status"] == "success"){
-                window.location.href = "paginaAdmin.html";
+                window.location.href = "../HTML/paginaAdmin.html";
             }
             else if(response["status"] == "error"){
                 alert(response["code"] + ": " + response["message"]);
