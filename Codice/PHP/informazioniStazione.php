@@ -36,6 +36,6 @@ else{
     <head>
     </head>
     <body>
-        <a href="mappa.html">Indietro</a>
+        <a href="../HTML/mappa.html">Indietro</a>
     </body>
 </html>

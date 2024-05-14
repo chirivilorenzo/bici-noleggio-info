@@ -1,5 +1,5 @@
 <?php
-include("classi/CDatabase.php");
+include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");
 
 if(!isset($_SESSION)) session_start();
@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     if(isset($_POST["email"]) && isset($_POST["password"])){
         $email = $_POST["email"];
         $password = $_POST["password"];
-        $query = "SELECT * FROM cliente WHERE email = ? AND password = ?";
+        $query = "SELECT * FROM admin WHERE email = ? AND password = ?";
 
         $classeDB = new CDatabase();
         $classeDB->connessione();
@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $result = $classeDB->seleziona($query, $email, $password);
 
         if($result != "errore" && $result != "vuoto"){
-            $_SESSION["idCliente"] = $result[0]["ID"];
+            $_SESSION["idAdmin"] = $result[0]["ID"];
             echo json_encode(array("status"=> "success", "code" => 200));
         }
         else if($result == "vuoto"){

@@ -23,7 +23,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "../PHP/getStazioni.php",
+                url: "../AJAX/getStazioni.php",
                 success: function(response){
                     for(let i = 0; i < response.length; i++){
                         addMarker(map, response[i]);
@@ -37,7 +37,7 @@
 
         function addMarker(map, response){
             var marker = L.marker([response["latitudine"], response["longitudine"]]).addTo(map);
-            marker.bindPopup("<b><a href='informazioniStazione.php?id=" + response["ID"] + "'>Nome: " + response["nome"] + "</a></b>");
+            marker.bindPopup("<b><a href='../PHP/informazioniStazione.php?id=" + response["ID"] + "'>Nome: " + response["nome"] + "</a></b>");
         }
     </script>
 </body>

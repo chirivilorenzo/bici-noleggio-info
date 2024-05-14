@@ -5,7 +5,7 @@ function loginCliente(){
 
     $.ajax({
         type: "POST",
-        url: "../PHP/loginCliente.php",
+        url: "../AJAX/loginCliente.php",
         data: {email: email, password: password},
         success: function(response){
             if(response["status"] == "success"){
@@ -32,7 +32,7 @@ function loginAdmin(){
 
     $.ajax({
         type: "POST",
-        url: "../PHP/loginAdmin.php",
+        url: "../AJAX/loginAdmin.php",
         data: {email: email, password: password},
         success: function(response){
             if(response["status"] == "success"){

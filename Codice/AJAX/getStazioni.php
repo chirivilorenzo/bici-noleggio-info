@@ -1,6 +1,6 @@
 <?php
 
-include("classi/CDatabase.php");
+include("../PHP/classi/CDatabase.php");
 header('Content-Type: application/json');
 
 if($_SERVER["REQUEST_METHOD"] === "GET"){
