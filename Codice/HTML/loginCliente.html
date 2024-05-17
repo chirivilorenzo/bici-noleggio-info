@@ -9,14 +9,15 @@
                 $("#accedi").click(function(){
                     loginCliente();
                 });
+
+                $("#index").click(function(){
+                    window.location.href = "index.html";
+                });
             });
         </script>
     </head>
     <body>
         <div class="login-container">
-            <div class="title-container">
-                
-            </div>
             <label for="email">Email Cliente:</label>
             <input type="text" id="email">
             
@@ -24,6 +25,7 @@
             <input type="password" id="password">
             
             <button id="accedi">Accedi</button>
+            <button id="index">Home</button>
         </div>
     </body>
 </html>
