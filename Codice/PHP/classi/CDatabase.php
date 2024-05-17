@@ -19,6 +19,18 @@
             $this->mysqli->set_charset('utf8mb4');
         }
 
+        public function iniziaTransazione() {
+            $this->mysqli->begin_transaction();
+        }
+    
+        public function commit() {
+            $this->mysqli->commit();
+        }
+    
+        public function rollback() {
+            $this->mysqli->rollBack();
+        }
+
         public function getLastID(){
             return $this->mysqli->insert_id;
         }

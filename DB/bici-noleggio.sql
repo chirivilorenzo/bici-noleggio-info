@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 10, 2024 alle 09:08
+-- Creato il: Mag 17, 2024 alle 09:51
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -61,7 +61,7 @@ CREATE TABLE `bici` (
 --
 
 INSERT INTO `bici` (`ID`, `disponibile`, `RFID`, `gps`, `km_percorsi`) VALUES
-(5, 1, '1234', 'GPS1', 0),
+(5, 0, '1234', 'GPS1', 0),
 (6, 1, '5678', 'GPS2', 0);
 
 -- --------------------------------------------------------
@@ -119,13 +119,20 @@ INSERT INTO `indirizzo` (`ID`, `via`, `citta`, `cap`, `num_civico`) VALUES
 
 CREATE TABLE `operazione` (
   `ID` int(11) NOT NULL,
-  `tipo` enum('noleggio','deposito','','') NOT NULL,
+  `tipo` enum('noleggio','deposito') NOT NULL,
   `data_ora` datetime NOT NULL,
   `distanza_percorsa` int(11) DEFAULT NULL,
   `idCliente` int(11) NOT NULL,
   `idBici` int(11) NOT NULL,
   `idStazione` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `operazione`
+--
+
+INSERT INTO `operazione` (`ID`, `tipo`, `data_ora`, `distanza_percorsa`, `idCliente`, `idBici`, `idStazione`) VALUES
+(2, '', '2024-05-17 09:20:03', NULL, 2, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -135,6 +142,7 @@ CREATE TABLE `operazione` (
 
 CREATE TABLE `stazione` (
   `ID` int(11) NOT NULL,
+  `nome` varchar(32) NOT NULL,
   `latitudine` varchar(10) NOT NULL,
   `longitudine` varchar(11) NOT NULL,
   `num_bici_disp` int(11) NOT NULL DEFAULT 50,
@@ -145,9 +153,9 @@ CREATE TABLE `stazione` (
 -- Dump dei dati per la tabella `stazione`
 --
 
-INSERT INTO `stazione` (`ID`, `latitudine`, `longitudine`, `num_bici_disp`, `num_slot_tot`) VALUES
-(1, '41.9028', '12.4964', 30, 50),
-(2, '45.4642', '9.1900', 25, 40);
+INSERT INTO `stazione` (`ID`, `nome`, `latitudine`, `longitudine`, `num_bici_disp`, `num_slot_tot`) VALUES
+(1, 'roma', '41.9028', '12.4964', 29, 50),
+(2, 'milano', '45.4642', '9.1900', 25, 50);
 
 --
 -- Indici per le tabelle scaricate
@@ -230,7 +238,7 @@ ALTER TABLE `indirizzo`
 -- AUTO_INCREMENT per la tabella `operazione`
 --
 ALTER TABLE `operazione`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `stazione`
