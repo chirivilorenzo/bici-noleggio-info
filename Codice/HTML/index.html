@@ -1,24 +1,64 @@
-<html>
-    <head>
-        <title>Home</title>
-        <link rel="stylesheet" href="../CSS/style_index.css">
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script>
-            $("document").ready(function(){
-                $("#loginC").click(function(){
-                    window.location.href = "loginCliente.html";
-                });
-
-                $("#loginA").click(function(){
-                    window.location.href = "loginAdmin.html";
-                });
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa Interattiva</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="../CSS/style_mappa.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $("document").ready(function(){
+            $("#loginC").click(function(){
+                window.location.href = "loginCliente.html";
             });
-        </script>
-    </head>
-    <body>
-        <div class="button-container">
-            <button id="loginC">Login Cliente</button><br>
-            <button id="loginA">Login Admin</button><br>
-        </div>
-    </body>
+
+            $("#loginA").click(function(){
+                window.location.href = "loginAdmin.html";
+            });
+
+            $("#registra").click(function(){
+                window.location.href = "registrazione.html";
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="button-container">
+        <button id="loginC">Login</button>
+        <button id="loginA">Login Admin</button>
+        <button id="registra">Registrati</button>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Inizializza la mappa centrata su Roma, Italia
+            var map = L.map('map').setView([41.9028, 12.4964], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            $.ajax({
+                type: "GET",
+                url: "../AJAX/getStazioni.php",
+                success: function(response){
+                    for(let i = 0; i < response.length; i++){
+                        addMarker(map, response[i]);
+                    }   
+                },
+                error: function(xhr, status, error) {
+                    console.error("Errore AJAX: ", status, error);
+                }
+            });
+        });
+
+        function addMarker(map, response){
+            var marker = L.marker([response["latitudine"], response["longitudine"]]).addTo(map);
+            marker.bindPopup("<b><a href='../PHP/informazioniStazione.php?id=" + response["ID"] + "'>Nome: " + response["nome"] + "</a></b>");
+        }
+    </script>
+</body>
 </html>

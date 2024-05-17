@@ -9,7 +9,7 @@ function loginCliente(){
         data: {email: email, password: password},
         success: function(response){
             if(response["status"] == "success"){
-                window.location.href = "../HTML/mappa.html";
+                window.location.href = "../HTML/paginaUtente.html";
             }
             else if(response["status"] == "error"){
                 alert(response["code"] + ": " + response["message"]);
