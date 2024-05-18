@@ -19,24 +19,18 @@ if (isset($_SESSION["idCliente"])){
     $classeDB = new CDatabase();
     $classeDB->connessione();
 
-    //inserire le info del db dentro ai div
+    $query = "SELECT * FROM cliente JOIN indirizzo ON indirizzo.ID = cliente.idIndirizzo WHERE cliente.ID = ?";
+    $result = $classeDB->seleziona($query, $_SESSION["idCliente"]);
 
-
-
+    if($result != "errore" && $result != "vuoto"){
+        $cliente = array();
+        foreach($result as $elemento){
+            $cliente[] = $elemento;
+        }
+        echo json_encode($cliente);
+    }
 }
 else{
+    http_response_code(405);
     echo json_encode(array("status"=> "error", "code"=> 405, "message"=> "non puoi visualizzare questa pagina"));
 }
-?>
-
-<html>
-    <head>
-        <title>Profilo utente</title>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    </head>
-    <body>
-        <div id="sezione1"></div>
-        <div id="sezione2"></div>
-        <div id="sezione3"></div>
-    </body>
-</html>

@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <title>Profilo utente</title>
+        <link rel="stylesheet" type="text/css" href="../CSS/style_profilo.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../JS/profiloUtente.js"></script>
+        <script>
+            $("document").ready(function(){
+                function mostraSezione(sezioneId) {
+                    $(".sezione").hide(); // Nascondi tutte le sezioni
+                    $(sezioneId).show();  // Mostra la sezione selezionata
+                }
+
+                $("#sezione1").show();
+
+                // Gestione dei click sui pulsanti di navigazione
+                $("#btn-sezione1").click(function() {
+                    mostraSezione("#sezione1");
+                });
+                $("#btn-sezione2").click(function() {
+                    mostraSezione("#sezione2");
+                });
+                $("#btn-sezione3").click(function() {
+                    mostraSezione("#sezione3");
+                });
+
+                caricaInformazioni();
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Pulsanti di navigazione -->
+        <div id="navigazione">
+            <button id="btn-sezione1">Sezione 1</button>
+            <button id="btn-sezione2">Sezione 2</button>
+            <button id="btn-sezione3">Sezione 3</button>
+        </div>
+    
+        <!-- Sezioni -->
+        <div id="sezione1" class="sezione">
+            <div class="form-row">
+                <label for="db-nome">Nome attuale: </label>
+                <span id="db-nome"></span>
+            </div>
+            <div class="form-row">
+                <label for="input-nome">Nuovo nome: </label>
+                <input type="text" id="input-nome">
+            </div>
+            <button id="nome" class="btn-update">Salva</button>
+    
+            <div class="form-row">
+                <label for="db-cognome">Cognome attuale: </label>
+                <span id="db-cognome"></span>
+            </div>
+            <div class="form-row">
+                <label for="input-cognome">Nuovo cognome:</label>
+                <input type="text" id="input-cognome">
+            </div>
+            <button id="cognome" class="btn-update">Salva</button>
+        </div>
+    
+        <div id="sezione2" class="sezione">
+            <div class="form-row">
+                <label for="db-email">Email attuale: </label>
+                <span id="db-email"></span>
+            </div>
+            <div class="form-row">
+                <label for="input-email">Nuova email: </label>
+                <input type="text" id="input-email">
+            </div>
+            <button id="email" class="btn-update">Salva</button>
+    
+            <div class="form-row">
+                <label for="db-password">Password attuale: </label>
+                <input type="text" id="db-password">
+            </div>
+            <div class="form-row">
+                <label for="input-password">Nuova password: </label>
+                <input type="password" id="input-password">
+            </div>
+            <button id="password" class="btn-update">Salva</button>
+    
+            <div class="form-row">
+                <label for="db-numCarta">Numero carta attuale: </label>
+                <span id="db-numCarta"></span>
+            </div>
+            <div class="form-row">
+                <label for="input-numCarta">Nuovo numero carta: </label>
+                <input type="text" id="input-numCarta">
+            </div>
+            <button id="numCarta" class="btn-update">Salva</button>
+        </div>
+    
+        <div id="sezione3" class="sezione">
+            <div class="form-row">
+                <label for="db-via">Via attuale: </label>
+                <span id="db-via"></span>
+            </div>
+            <div class="form-row">
+                <label for="input-via">Nuova via: </label>
+                <input type="text" id="input-via">
+            </div>
+            <button id="via" class="btn-update">Salva</button>
+    
+            <div class="form-row">
+                <label for="db-citta">Citta attuale: </label>
+                <span id="db-citta"></span>
+            </div>
+            <div class="form-row">
+                <label for="input-citta">Nuova citta: </label>
+                <input type="text" id="input-citta">
+            </div>
+            <button id="citta" class="btn-update">Salva</button>
+    
+            <div class="form-row">
+                <label for="db-cap">CAP attuale: </label>
+                <span id="db-cap"></span>
+            </div>
+            <div class="form-row">
+                <label for="input-cap">Nuovo CAP: </label>
+                <input type="text" id="input-cap">
+            </div>
+            <button id="cap" class="btn-update">Salva</button>
+    
+            <div class="form-row">
+                <label for="db-numCivico">Numero civico attuale: </label>
+                <span id="db-numCivico"></span>
+            </div>
+            <div class="form-row">
+                <label for="input-numCivico">Nuovo numero civico: </label>
+                <input type="text" id="input-numCivico">
+            </div>
+            <button id="numCivico" class="btn-update">Salva</button>
+        </div>
+    </body>
+</html>
