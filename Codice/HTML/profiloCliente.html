@@ -3,30 +3,7 @@
         <title>Profilo utente</title>
         <link rel="stylesheet" type="text/css" href="../CSS/style_profilo.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="../JS/profiloUtente.js"></script>
-        <script>
-            $("document").ready(function(){
-                function mostraSezione(sezioneId) {
-                    $(".sezione").hide(); // Nascondi tutte le sezioni
-                    $(sezioneId).show();  // Mostra la sezione selezionata
-                }
-
-                $("#sezione1").show();
-
-                // Gestione dei click sui pulsanti di navigazione
-                $("#btn-sezione1").click(function() {
-                    mostraSezione("#sezione1");
-                });
-                $("#btn-sezione2").click(function() {
-                    mostraSezione("#sezione2");
-                });
-                $("#btn-sezione3").click(function() {
-                    mostraSezione("#sezione3");
-                });
-
-                caricaInformazioni();
-            });
-        </script>
+        <script src="../JS/profiloCliente.js"></script>
     </head>
     <body>
         <!-- Pulsanti di navigazione -->
@@ -72,7 +49,7 @@
     
             <div class="form-row">
                 <label for="db-password">Password attuale: </label>
-                <input type="text" id="db-password">
+                <input type="password" id="db-password">
             </div>
             <div class="form-row">
                 <label for="input-password">Nuova password: </label>

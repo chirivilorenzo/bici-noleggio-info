@@ -25,6 +25,9 @@ if (isset($_SESSION["idCliente"])){
     if($result != "errore" && $result != "vuoto"){
         $cliente = array();
         foreach($result as $elemento){
+            if($elemento["num_carta_credito"] != null){
+                $elemento["num_carta_credito"] = "**** **** **** " . substr($elemento["num_carta_credito"], -4);
+            }
             $cliente[] = $elemento;
         }
         echo json_encode($cliente);
