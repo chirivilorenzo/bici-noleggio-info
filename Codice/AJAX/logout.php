@@ -1,7 +1,8 @@
 <?php
+    header("Content-Type: application/json");
 
-    if(!isset($_SESSION)){
-        session_start();
-    }
+    session_start();
 
     session_destroy();
+
+    echo json_encode(['success' => true]);

@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="../CSS/style_mappa.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../JS/logout.js"></script>
+    <script src="../JS/checkAuth.js"></script>
     <script>
         $("document").ready(function(){
+            checkAuth();
             $("#profilo").click(function(){
                 window.location.href = "profiloCliente.html";
             });
@@ -17,12 +20,10 @@
             $("#riepilogo").click(function(){
                 window.location.href = "riepilogoCliente.html";
             });
-
             $("#logout").click(function(){
-                $.get("../AJAX/logout.php", {}, function(data){
-                    window.location.href = "index.html";
-                });
-            });
+                if (confirm("Sei sicuro di voler effettuare il logout?"))
+                    logout();
+            });            
         });
     </script>
 </head>

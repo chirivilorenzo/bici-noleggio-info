@@ -4,10 +4,21 @@
         <link rel="stylesheet" type="text/css" href="../CSS/style_profilo.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="../JS/profiloCliente.js"></script>
+        <script src="../JS/logout.js"></script>
+        <script src="../JS/checkAuth.js"></script>
+        <script>
+            $("document").ready(function(){
+                checkAuth();
+                $("#logout").click(function(){
+                    if (confirm("Sei sicuro di voler effettuare il logout?"))
+                        logout();
+                });
+            });
+        </script>
     </head>
     <body>
         <!-- Pulsanti di navigazione -->
-        <div id="navigazione">
+        <div class="navigazione">
             <button id="btn-sezione1">Sezione 1</button>
             <button id="btn-sezione2">Sezione 2</button>
             <button id="btn-sezione3">Sezione 3</button>
@@ -108,6 +119,9 @@
                 <input type="text" id="input-numCivico">
             </div>
             <button id="numCivico" class="btn-update">Salva</button>
+        </div>
+        <div class="navigazione">
+            <button id="logout">Logout</button>
         </div>
     </body>
 </html>
