@@ -13,6 +13,10 @@
                     if (confirm("Sei sicuro di voler effettuare il logout?"))
                         logout();
                 });
+
+                $("#back").click(function(){
+                    window.location.href = "menuCliente.html";
+                });
             });
         </script>
     </head>
@@ -121,6 +125,7 @@
             <button id="numCivico" class="btn-update">Salva</button>
         </div>
         <div class="navigazione">
+            <button id="back">Indietro</button>
             <button id="logout">Logout</button>
         </div>
     </body>
