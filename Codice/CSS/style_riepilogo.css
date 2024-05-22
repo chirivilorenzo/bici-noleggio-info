@@ -1,0 +1,74 @@
+/* Stile per il corpo della pagina */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Contenitore principale per centrare contenuto orizzontalmente */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Contenitore per la tabella con scorrimento */
+.table-container {
+    max-height: 300px; /* Altezza massima della tabella */
+    overflow-y: auto;
+    width: 100%;
+    max-width: 800px; /* Larghezza massima della tabella */
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Stile per la tabella */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Stile per i bottoni */
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Contenitore per i pulsanti */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

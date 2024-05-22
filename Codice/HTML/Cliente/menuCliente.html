@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mappa Interattiva</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="../CSS/style_mappa.css">
+    <link rel="stylesheet" href="../../CSS/style_mappa.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../JS/logout.js"></script>
-    <script src="../JS/checkAuth.js"></script>
+    <script src="../../JS/logout.js"></script>
+    <script src="../../JS/checkAuth.js"></script>
     <script>
         $("document").ready(function(){
             checkAuth();
@@ -18,7 +18,7 @@
             });
 
             $("#riepilogo").click(function(){
-                window.location.href = "../PHP/riepilogoCliente.php";
+                window.location.href = "../../PHP/riepilogoCliente.php";
             });
             
             $("#logout").click(function(){
@@ -61,7 +61,7 @@
 
         function addMarker(map, response){
             var marker = L.marker([response["latitudine"], response["longitudine"]]).addTo(map);
-            marker.bindPopup("<b><a href='../PHP/informazioniStazione.php?id=" + response["ID"] + "'>Nome: " + response["nome"] + "</a></b>");
+            marker.bindPopup("<b><a href='../../PHP/informazioniStazione.php?id=" + response["ID"] + "'>Nome: " + response["nome"] + "</a></b>");
         }
     </script>
 </body>

@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <title>Modifica Stazione</title>
+        <link rel="stylesheet" href="../../CSS/style_modificaStazBici.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../../JS/checkAuth.js"></script>
+        <script src="../../JS/logout.js"></script>
+        <script>
+            $("document").ready(function(){
+                checkAuth();
+                caricaStazioni();
+
+                $("#aggiungi").show();
+
+                $("#btn-aggiungi").click(function() {
+                    mostraSezione("#aggiungi");
+                });
+
+                $("#btn-rimuovi").click(function() {
+                    mostraSezione("#rimuovi");
+                });
+
+                $("#btn-add").click(function(){
+                    aggiungiStazione();
+                });
+
+                $("#btn-remove").click(function(){
+                    rimuoviStazione();
+                });
+
+                $("#back").click(function(){
+                    window.location.href="menuAdmin.html";
+                });
+
+                $("#logout").click(function(){
+                    if (confirm("Sei sicuro di voler effettuare il logout?"))
+                        logout();
+                });
+            });
+
+            function mostraSezione(sezioneId) {
+                $(".sezione").hide();
+                $(sezioneId).show();
+            }
+
+            function caricaStazioni(){
+                $.get("../../AJAX/getStazioni.php", {}, function(data){
+                    for(let i = 0; i < data.length; i++){
+                        riempiSelect(data[i]["ID"], data[i]["nome"]);
+                    }
+                });
+            }
+
+            function riempiSelect(id, nome){
+                let optionDOM = $("<option>" + id + " - " + nome + "</option>");
+                $("#list-stazioni").append(optionDOM);
+            }
+
+            function aggiungiStazione(){
+                let nome = $("#input-nome").val();
+                let latitudine = $("#input-latitudine").val();
+                let longitudine = $("#input-longitudine").val();
+                let slot = $("#input-slot").val();
+                let numDisponibili = 50
+
+                $.post("../../AJAX/addStazione.php", {nome: nome, latitudine: latitudine, longitudine: longitudine, slot: slot, numDisponibili: numDisponibili}, function(response){
+                    if(response["status"] == "success"){
+                        alert("stazione aggiunta");
+                    }
+                    else{
+                        alert(response["status"] + " " + response["code"] + ": " + response["message"]);
+                    }
+                });
+            }
+
+            function rimuoviStazione(){
+                let id = $("#list-stazioni").val().substr(0,1);
+                $.post("../../AJAX/removeStazione.php", {id: id}, function(response){
+                    if(response["status"] == "success"){
+                        alert("stazione rimossa");
+                    }
+                    else{
+                        alert(response["status"] + " " + response["code"] + ": " + response["message"]);
+                    }
+                });
+            }
+
+        </script>
+    </head>
+    <body>
+        <div class="navigazione">
+            <button id="btn-aggiungi">Aggiungi</button>
+            <button id="btn-rimuovi">Rimuovi</button>
+            <button id="back">Indietro</button>
+            <button id="logout">Logout</button>
+        </div>
+
+        <div id="aggiungi" class="sezione">
+            <div class="form-row">
+                <label for="input-nome">Nome: </label>
+                <input type="text" id="input-nome">
+            </div>
+            <div class="form-row">
+                <label for="input-latitudine">Latitudine: </label>
+                <input type="text" id="input-latitudine">
+            </div>
+            <div class="form-row">
+                <label for="input-longitudine">Longitudine: </label>
+                <input type="text" id="input-longitudine">
+            </div>
+            <div class="form-row">
+                <label for="input-slot">Slot totali: </label>
+                <input type="text" id="input-slot">
+            </div>
+            <button id="btn-add" class="btn-update">Aggiungi</button>
+        </div>
+        <div id="rimuovi" class="sezione">
+            <select id="list-stazioni"></select><br>
+            <button id="btn-delete" class="btn-update">Rimuovi</button>
+        </div>
+    </body>
+</html>

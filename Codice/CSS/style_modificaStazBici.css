@@ -1,0 +1,73 @@
+/* Stile generale */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrare il contenuto lungo l'asse x */
+}
+
+/* Contenitore principale */
+.navigazione {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Stile per i pulsanti */
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Stile per le sezioni */
+.sezione {
+    display: none;
+    margin-top: 20px;
+    text-align: center; /* Centrare il contenuto all'interno delle sezioni */
+}
+
+/* Stile per i campi di input */
+.form-row {
+    margin-bottom: 15px;
+    text-align: center; /* Centrare il contenuto all'interno delle form-row */
+}
+
+label {
+    margin-right: 10px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Stile per il pulsante di aggiunta */
+#btn-add {
+    background-color: #28a745;
+}
+
+#btn-add:hover {
+    background-color: #218838;
+}
+
+/* Stile per il pulsante di rimozione */
+#btn-delete {
+    background-color: #dc3545;
+}
+
+#btn-delete:hover {
+    background-color: #c82333;
+}

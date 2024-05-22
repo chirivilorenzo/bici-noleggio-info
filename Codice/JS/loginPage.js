@@ -5,11 +5,11 @@ function loginCliente(){
 
     $.ajax({
         type: "POST",
-        url: "../AJAX/loginCliente.php",
+        url: "../../AJAX/loginCliente.php",
         data: {email: email, password: password},
         success: function(response){
             if(response["status"] == "success"){
-                window.location.href = "../HTML/menuCliente.html";
+                window.location.href = "../../HTML/Cliente/menuCliente.html";
             }
             else if(response["status"] == "error"){
                 alert(response["code"] + ": " + response["message"]);
@@ -32,11 +32,11 @@ function loginAdmin(){
 
     $.ajax({
         type: "POST",
-        url: "../AJAX/loginAdmin.php",
+        url: "../../AJAX/loginAdmin.php",
         data: {email: email, password: password},
         success: function(response){
             if(response["status"] == "success"){
-                window.location.href = "../HTML/paginaAdmin.html";
+                window.location.href = "../../HTML/Admin/menuAdmin.html";
             }
             else if(response["status"] == "error"){
                 alert(response["code"] + ": " + response["message"]);

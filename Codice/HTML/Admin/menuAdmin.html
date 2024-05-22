@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Menu admin</title>
+        <link rel="stylesheet" href="../../CSS/style_menuAdmin.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../../JS/checkAuth.js"></script>
+        <script src="../../JS/logout.js"></script>
+        <script>
+            $("document").ready(function(){
+                checkAuth();
+
+                $("#logout").click(function(){
+                    logout();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <a href="modificaStazione.html">Modifica stazione</a>
+            <a href="modificaSlot.html">Modifica slot</a>
+            <a href="modificaBici.html">Modifica bici</a>
+            <a href="visualizzaStatistiche.html">Visualizza statistiche</a>
+            <button id="logout">Logout</button>
+        </div>
+    </body>
+</html>

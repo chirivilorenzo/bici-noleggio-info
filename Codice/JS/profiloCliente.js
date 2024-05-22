@@ -64,7 +64,7 @@ $("document").ready(function(){
     function modificaNome(){
         let nome = $("#input-nome").val();
 
-        $.post("../AJAX/modificaValori.php", {nome: nome}, function(data){
+        $.post("../../AJAX/modificaValori.php", {nome: nome}, function(data){
             if(data["status"] == "success"){
                 alert("nome modificato con successo");
                 caricaInformazioni();
@@ -76,7 +76,7 @@ $("document").ready(function(){
     function modificaCognome(){
         let cognome = $("#input-cognome").val();
 
-        $.post("../AJAX/modificaValori.php", {cognome: cognome}, function(data){
+        $.post("../../AJAX/modificaValori.php", {cognome: cognome}, function(data){
             if(data["status"] == "success"){
                 alert("cognome modificato con successo");
                 caricaInformazioni();
@@ -88,7 +88,7 @@ $("document").ready(function(){
     function modificaEmail(){
         let email = $("#input-email").val();
 
-        $.post("../AJAX/modificaValori.php", {email: email}, function(data){
+        $.post("../../AJAX/modificaValori.php", {email: email}, function(data){
             if(data["status"] == "success"){
                 alert("email modificato con successo");
                 caricaInformazioni();
@@ -101,7 +101,7 @@ $("document").ready(function(){
         let pswVecchia = $("#db-password").val();
         let pswNuova = $("#input-password").val();
 
-        $.post("../AJAX/modificaValori.php", {pswVecchia: pswVecchia, pswNuova: pswNuova}, function(data){
+        $.post("../../AJAX/modificaValori.php", {pswVecchia: pswVecchia, pswNuova: pswNuova}, function(data){
             if(data["status"] == "success"){
                 alert("password modificato con successo");
                 caricaInformazioni();
@@ -113,7 +113,7 @@ $("document").ready(function(){
     function modificaNumCarta(){
         let numCarta = $("#input-numCarta").val();
 
-        $.post("../AJAX/modificaValori.php", {numCarta: numCarta}, function(data){
+        $.post("../../AJAX/modificaValori.php", {numCarta: numCarta}, function(data){
             if(data["status"] == "success"){
                 alert("numero carta modificato con successo");
                 caricaInformazioni();
@@ -125,7 +125,7 @@ $("document").ready(function(){
     function modificaVia(){
         let via = $("#input-via").val();
 
-        $.post("../AJAX/modificaValori.php", {via: via}, function(data){
+        $.post("../../AJAX/modificaValori.php", {via: via}, function(data){
             if(data["status"] == "success"){
                 alert("via modificato con successo");
                 caricaInformazioni();
@@ -137,7 +137,7 @@ $("document").ready(function(){
     function modificaCitta(){
         let citta = $("#input-citta").val();
 
-        $.post("../AJAX/modificaValori.php", {citta: citta}, function(data){
+        $.post("../../AJAX/modificaValori.php", {citta: citta}, function(data){
             if(data["status"] == "success"){
                 alert("citta modificato con successo");
                 caricaInformazioni();
@@ -149,7 +149,7 @@ $("document").ready(function(){
     function modificaCap(){
         let cap = $("#input-cap").val();
 
-        $.post("../AJAX/modificaValori.php", {cap: cap}, function(data){
+        $.post("../../AJAX/modificaValori.php", {cap: cap}, function(data){
             if(data["status"] == "success"){
                 alert("cap modificato con successo");
                 caricaInformazioni();
@@ -161,7 +161,7 @@ $("document").ready(function(){
     function modificaNumCivico(){
         let numCivico = $("#input-numCivico").val();
 
-        $.post("../AJAX/modificaValori.php", {numCivico: numCivico}, function(data){
+        $.post("../../AJAX/modificaValori.php", {numCivico: numCivico}, function(data){
             if(data["status"] == "success"){
                 alert("numero civico modificato con successo");
                 caricaInformazioni();
@@ -174,7 +174,7 @@ $("document").ready(function(){
         //prende tutto
         $.ajax({
             type: "POST",
-            url: "../AJAX/getClienteInfo.php",
+            url: "../../AJAX/getClienteInfo.php",
             success: function(response){
                 response.forEach(gestisciCaricamenti);
             }

@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <title>Modifica Bici</title>
+        <link rel="stylesheet" href="../../CSS/style_modificaStazBici.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../../JS/checkAuth.js"></script>
+        <script src="../../JS/logout.js"></script>
+        <script>
+            $("#document").ready(function(){
+                checkAuth();
+                caricaBici();
+
+                $("#aggiungi").show();
+
+                $("#btn-aggiungi").click(function() {
+                    mostraSezione("#aggiungi");
+                });
+
+                $("#btn-rimuovi").click(function() {
+                    mostraSezione("#rimuovi");
+                });
+
+                $("#btn-add").click(function(){
+                    aggiungiBici();
+                });
+
+                $("#btn-remove").click(function(){
+                    rimuoviBici();
+                });
+
+                $("#back").click(function(){
+                    window.location.href="menuAdmin.html";
+                });
+
+                $("#logout").click(function(){
+                    if (confirm("Sei sicuro di voler effettuare il logout?"))
+                        logout();
+                });
+            });
+
+            function mostraSezione(sezioneId) {
+                $(".sezione").hide();
+                $(sezioneId).show();
+            }
+
+            function aggiungiBici(){
+                let rfid = $("#input-rfid").val();
+                let gps = $("#input-gps").val();
+                let disponibile = 1;
+                let kmPercorsi = 0;
+
+                $.post("../../AJAX/addBici.php", {rfid: rfid, gps: gps, disponibile: disponibile, kmPercorsi: kmPercorsi}, function(response){
+                    if(response["status"] == "success"){
+                        alert("bici aggiunta");
+                    }
+                    else{
+                        alert(response["status"] + " " + response["code"] + ": " + response["message"]);
+                    }
+                });
+            }
+
+            function caricaBici(){
+                $.get("../../AJAX/getBici.php", {}, function(data){
+                    for(let i = 0; i < data.length; i++){
+                        riempiSelect(data[i]["ID"], data[i]["RFID"]);
+                    }
+                });
+            }
+
+            function riempiSelect(id, rfid){
+                let optionDOM = $("<option>" + id + " - " + rfid + "</option>");
+                $("#list-bici").append(optionDOM);
+            }
+
+            function rimuoviBici(){
+                let id = $("#list-bici").val().substr(0,1);
+                $.post("../../AJAX/removeBici.php", {id: id}, function(response){
+                    if(response["status"] == "success"){
+                        alert("bici rimossa");
+                    }
+                    else{
+                        alert(response["status"] + " " + response["code"] + ": " + response["message"]);
+                    }
+                });                
+            }
+        </script>
+    </head>
+    <body>
+        <div class="navigazione">
+            <button id="btn-aggiungi">Sezione Aggiungi</button>
+            <button id="btn-rimuovi">Sezione Rimuovi</button>
+            <button id="back">Indietro</button>
+            <button id="logout">Logout</button>
+        </div>
+
+        <div id="aggiungi" class="sezione">
+            <div class="form-row">
+                <label for="input-rfid">RFID: </label>
+                <input type="text" id="input-rfid">
+            </div>
+            <div class="form-row">
+                <label for="input-gps">gps: </label>
+                <input type="text" id="input-gps">
+            </div>
+            <button id="btn-add" class="btn-update">Aggiungi</button>
+        </div>
+        <div id="rimuovi" class="sezione">
+            <select id="list-bici"></select><br>
+            <button id="btn-delete" class="btn-update">Rimuovi</button>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Modifica Slot</title>
+        <link rel="stylesheet" href="../../CSS/style_modificaSlot.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../../JS/checkAuth.js"></script>
+        <script src="../../JS/logout.js"></script>
+        <script>
+            $("document").ready(function(){
+                checkAuth();
+                caricaStazioni();
+
+                $("#invia").click(function(){
+                    let id = $("#list-stazioni").val().substr(0,1);
+                    let num = $("#numSlot").val();
+
+                    $.post("../../AJAX/modificaSlot.php", {id: id, num: num}, function(response){
+                        if(response["status"] == "success"){
+                        alert("num slot modificato");
+                        }
+                        else{
+                            alert(response["status"] + " " + response["code"] + ": " + response["message"]);
+                        }
+                    });
+                });
+
+                $("#back").click(function(){
+                    window.location.href="menuAdmin.html";
+                });
+
+                $("#logout").click(function(){
+                    if (confirm("Sei sicuro di voler effettuare il logout?"))
+                        logout();
+                });
+            });
+
+            function caricaStazioni(){
+                $.get("../../AJAX/getStazioni.php", {}, function(data){
+                    for(let i = 0; i < data.length; i++){
+                        riempiSelect(data[i]["ID"], data[i]["nome"]);
+                    }
+                });
+            }
+
+            function riempiSelect(id, nome){
+                let optionDOM = $("<option>" + id + " - " + nome + "</option>");
+                $("#list-stazioni").append(optionDOM);
+            }
+        </script>
+    </head>
+    <body>
+        <select id="list-stazioni"></select>
+        <label for="numSlot">Numero slot nuovo</label>
+        <input type="number" id="numSlot">
+        <button id="invia">Salva</button>
+        <button id="back">Indietro</button>
+        <button id="logout">Logout</button>
+    </body>
+</html>
