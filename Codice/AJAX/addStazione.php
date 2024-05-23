@@ -1,4 +1,6 @@
 <?php
+//inserisce nel db una nuova stazione
+//richiamata da HTML/Admin/modificaStazione.html
 
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");

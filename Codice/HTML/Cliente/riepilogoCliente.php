@@ -1,11 +1,9 @@
-
-
 <html>
     <head>
         <title>Riepilogo Cliente</title>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="../JS/logout.js"></script>
-        <link rel="stylesheet" href="../CSS/style_riepilogo.css">
+        <script src="../../JS/logout.js"></script>
+        <link rel="stylesheet" href="../../CSS/style_riepilogo.css">
         <script>
             $("document").ready(function(){
                 $("#logout").click(function(){
@@ -14,7 +12,7 @@
                 });
 
                 $("#back").click(function(){
-                    window.location.href = "../HTML/Cliente/menuCliente.html";
+                    window.location.href = "menuCliente.html";
                 });
             });
         </script>
@@ -23,7 +21,7 @@
     <div class="container">
         <div class="table-container">
             <?php
-            include("classi/CDatabase.php");
+            include("../../PHP/classi/CDatabase.php");
 
             if(!isset($_SESSION)) session_start();
 
@@ -33,17 +31,21 @@
 
                 $tabella = "<table><th>Tipo</th><th>Data e ora</th><th>Distanza percorsa</th>";
                 $result = $classeDB->seleziona("SELECT * FROM operazione WHERE idCliente = ?", $_SESSION["idCliente"]);
-                foreach($result as $operazione){
-                    if($operazione["distanza_percorsa"] == null) $operazione["distanza_percorsa"] = "NULL";
-                    $tabella .= "<tr>";
-                    $tabella .= "<td>" . $operazione["tipo"] . "</td>";
-                    $tabella .= "<td>" . $operazione["data_ora"] . "</td>";
-                    $tabella .= "<td>" . $operazione["distanza_percorsa"] . "</td>";
-                    $tabella .= "</tr>";
+                if($result == "vuoto"){
+                    echo "Nessuna operazione per questo utente";
                 }
-
-                $tabella .= "</table>";
-                echo $tabella;
+                else{
+                    foreach($result as $operazione){
+                        if($operazione["distanza_percorsa"] == null) $operazione["distanza_percorsa"] = "NULL";
+                        $tabella .= "<tr>";
+                        $tabella .= "<td>" . $operazione["tipo"] . "</td>";
+                        $tabella .= "<td>" . $operazione["data_ora"] . "</td>";
+                        $tabella .= "<td>" . $operazione["distanza_percorsa"] . "</td>";
+                        $tabella .= "</tr>";
+                    }
+                    $tabella .= "</table>";
+                    echo $tabella;
+                }
             }
             else{
                 header("Location: ../HTML/index.html");

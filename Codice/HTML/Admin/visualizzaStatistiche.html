@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Visualizza Statistiche</title>
+        <link rel="stylesheet" href="../../CSS/style_modificaStazBici.css">
+        <link rel="stylesheet" href="../../CSS/style_riepilogo.css">
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../../JS/checkAuth.js"></script>
+        <script src="../../JS/logout.js"></script>
+        <style>
+            .sezione{
+                display: none;
+            }
+        </style>
+        <script>
+            $("document").ready(function(){
+                checkAuth();
+
+                //tutte le bici
+                caricaBiciTot();
+
+                //bici che necessitano di una manutenzione
+                caricaBiciManutenzione();
+
+                //bici che sono state noleggiate da più di un giorno e non sono state riconsegnate
+                caricaBiciGiorni();
+
+                $("#biciTot").show();
+
+                $("#btn-biciTot").click(function() {
+                    mostraSezione("#biciTot");
+                });
+
+                $("#btn-biciManutenzione").click(function() {
+                    mostraSezione("#biciManutenzione");
+                });
+
+                $("#btn-biciGiorni").click(function() {
+                    mostraSezione("#biciGiorni");
+                });
+
+                $("#logout").click(function(){
+                    logout();
+                });
+
+                $("#back").click(function(){
+                    window.location.href="menuAdmin.html";
+                });
+            });
+
+            function mostraSezione(sezioneId) {
+                $(".sezione").hide();
+                $(sezioneId).show();
+            }
+
+            function caricaBiciTot(){
+                $.get("../../AJAX/getBici.php", {}, function(data){
+                    for(let i = 0; i < data.length; i++){
+                        inserisciBici("#tbl-biciTot", data[i]["ID"], data[i]["RFID"], data[i]["km_percorsi"], data[i]["disponibile"], data[i]["km_manutenzione"]);
+                    }
+                });
+            }
+
+            function caricaBiciManutenzione(){
+                $.get("../../AJAX/getBici.php", {}, function(data){
+                    for(let i = 0; i < data.length; i++){
+                        if((data[i]["km_percorsi"] - data[i]["km_manutenzione"]) >= 100){
+                            inserisciBici("#tbl-biciManutenzione", data[i]["ID"], data[i]["RFID"], data[i]["km_percorsi"], data[i]["disponibile"], data[i]["km_manutenzione"]);
+                        }
+                    }
+                });
+            }
+
+            function caricaBiciGiorni(){
+                $.get("../../AJAX/getBiciGiorni.php", {}, function(data){
+                    for(let i = 0; i < data.length; i++){
+                        inserisciBici("#tbl-biciGiorni", data[i]["ID"], data[i]["RFID"], data[i]["km_percorsi"], data[i]["disponibile"], data[i]["km_manutenzione"]);
+                    }
+                });
+            }
+
+            function inserisciBici(nomeTabella, id, rfid, km, disponibile, kmManutenzione){
+                let rigaDOM = $("<tr></tr>");
+                let idDOM = $("<td>" + id + "</td>");
+                let rfidDOM = $("<td>" + rfid + "</td>");
+                let kmDOM = $("<td>" + km + "km</td>");
+                let disponibileDOM = $("<td>" + disponibile + "</td>");
+                let kmManutenzioneDOM = $("<td>" + kmManutenzione + "km</td>");
+
+                rigaDOM.append(idDOM, rfidDOM, kmDOM, disponibileDOM, kmManutenzioneDOM);
+                $(nomeTabella).append(rigaDOM);
+            }
+        </script>
+    </head>
+    <body>
+        <div class="navigazione">
+            <button id="btn-biciTot">Bici totali</button>
+            <button id="btn-biciManutenzione">Bici manutenzione</button>
+            <button id="btn-biciGiorni">Bici > 1 giorno</button>
+            <button id="back">Indietro</button>
+            <button id="logout">Logout</button>
+        </div>
+
+        <div id="biciTot" class="sezione">
+            <h3>Tutte le bici</h3>
+            <table id="tbl-biciTot">
+                <th>id</th>
+                <th>RFID</th>
+                <th>km percorsi</th>
+                <th>disponibile</th>
+                <th>km ultima manutenzione</th>
+            </table>
+        </div>
+        <div id="biciManutenzione" class="sezione">
+            <h3>Bici che devono andare in manutenzione</h3>
+            <table id="tbl-biciManutenzione">
+                <th>id</th>
+                <th>RFID</th>
+                <th>km percorsi</th>
+                <th>disponibile</th>
+                <th>km ultima manutenzione</th>
+            </table>
+        </div>
+        <div id="biciGiorni" class="sezione">
+            <h3>Bici noleggiate da più di un giorno</h3>
+            <table id="tbl-biciGiorni">
+                <th>id</th>
+                <th>RFID</th>
+                <th>km percorsi</th>
+                <th>disponibile</th>
+                <th>km ultima manutenzione</th>
+            </table>
+        </div>
+    </body>
+</html>

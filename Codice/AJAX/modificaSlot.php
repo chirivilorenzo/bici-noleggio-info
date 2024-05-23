@@ -1,4 +1,6 @@
 <?php
+//modifica il numero degli slot totali di una certa stazione (preso id in post)
+//richiamata da HTML/Admin/modificaSlot.html
 
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");

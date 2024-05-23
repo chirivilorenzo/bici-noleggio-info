@@ -1,4 +1,6 @@
 <?php
+//inserisce nel db una nuova bici
+//richiamata da HTML/Admin/modificaBici.html
 
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");

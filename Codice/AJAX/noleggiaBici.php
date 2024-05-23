@@ -1,4 +1,6 @@
 <?php
+//endpoint per noleggiare una bici
+//ovviamente non viene richiamato da nessuna pagina
 
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");

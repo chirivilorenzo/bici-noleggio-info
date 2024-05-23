@@ -1,4 +1,6 @@
 <?php
+//modifica i vari attributi dell'utente
+//richiamata da JS/profiloCliente.js
 
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");

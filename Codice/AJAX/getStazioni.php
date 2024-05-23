@@ -1,4 +1,10 @@
 <?php
+//restituisce un json con tutte le stazioni nel db
+//richiamata da
+// - HTML/Admin/modificaSlot.html
+// - HTML/Admin/modificaStazione.html
+// - HTML/Cliente/menuCliente.html
+// - HTML/index.html
 
 include("../PHP/classi/CDatabase.php");
 header('Content-Type: application/json');

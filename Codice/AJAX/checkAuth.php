@@ -1,4 +1,6 @@
 <?php
+//controlla se l'utente che vuole visualizzare una pagina specifica sia autenticato o no
+//richiamata da JS/checkAuth.js
 
 header("Content-Type: application/json");
 

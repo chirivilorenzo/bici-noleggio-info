@@ -1,4 +1,7 @@
 <?php
+//registra un nuovo cliente
+//richiamata da HTML/registrazione.html
+
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");
 

@@ -1,4 +1,7 @@
 <?php
+//elimina la sessione attiva (fa appunto il logout)
+//richiamata da JS/logout.js
+
     header("Content-Type: application/json");
 
     session_start();

@@ -20,7 +20,7 @@ body {
 
 /* Contenitore per la tabella con scorrimento */
 .table-container {
-    max-height: 300px; /* Altezza massima della tabella */
+    max-height: 1000px; /* Altezza massima della tabella */
     overflow-y: auto;
     width: 100%;
     max-width: 800px; /* Larghezza massima della tabella */

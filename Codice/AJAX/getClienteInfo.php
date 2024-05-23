@@ -1,14 +1,6 @@
 <?php
-
-//prendere dal db tutte le info dell'utente e visualizzarle
-//poi mettere delle input type per far modificare queste informazioni
-//password mettere 2 input (psw vecchia e nuova)
-//num carta visualizzare solo ultime 4 cifre (se è nel db)
-
-//dividere le cose in diverse sezioni
-//- sezione 1 -> nome e cognome
-//- sezione 2 -> email, password e numero carta
-//- sezione 3 -> dati dell'indirizzo
+//restituisce un json contenente tutte le info di quell'utente dal db
+//richiamata da JS/profiloCliente.js
 
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");

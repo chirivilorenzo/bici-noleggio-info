@@ -1,4 +1,6 @@
 <?php
+//rimuove stazione dal db (tramite id in post)
+//richiamata da HTML/Admin/modificaStazione.html
 
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");

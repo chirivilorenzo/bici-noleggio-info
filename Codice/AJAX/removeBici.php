@@ -1,4 +1,6 @@
 <?php
+//rimuove una certa bici dal db (tramite id in post)
+//richiamata da HTML/Admin/modificaBici.html
 
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");

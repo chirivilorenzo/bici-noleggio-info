@@ -1,4 +1,7 @@
 <?php
+//controlla se quelle credenziali sono presenti nella tabella cliente nel db
+//richiamata da JS/loginPage.js
+
 include("../PHP/classi/CDatabase.php");
 header("Content-Type: application/json");
 
