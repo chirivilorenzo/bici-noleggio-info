@@ -2,17 +2,11 @@
     <head>
         <title>Riepilogo Cliente</title>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="../../JS/logout.js"></script>
         <link rel="stylesheet" href="../../CSS/style_riepilogo.css">
         <script>
             $("document").ready(function(){
-                $("#logout").click(function(){
-                    if (confirm("Sei sicuro di voler effettuare il logout?"))
-                        logout();
-                });
-
                 $("#back").click(function(){
-                    window.location.href = "menuCliente.html";
+                    window.location.href = "../../HTML/Cliente/menuCliente.html";
                 });
             });
         </script>
@@ -21,7 +15,7 @@
     <div class="container">
         <div class="table-container">
             <?php
-            include("../../PHP/classi/CDatabase.php");
+            include("../classi/CDatabase.php");
 
             if(!isset($_SESSION)) session_start();
 
@@ -48,13 +42,12 @@
                 }
             }
             else{
-                header("Location: ../HTML/index.html");
+                header("Location: ../../HTML/index.html");
             }
             ?>
         </div>
         <div class="button-container">
             <button id="back">Indietro</button>
-            <button id="logout">Logout</button>
         </div>
     </div>
 </body>

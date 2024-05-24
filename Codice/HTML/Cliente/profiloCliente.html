@@ -1,9 +1,10 @@
 <html>
     <head>
         <title>Profilo utente</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="../../CSS/style_profilo.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="../../JS/profiloCliente.js"></script>
+        <script src="../../JS/profiloCliente.js" charset="UTF-8"></script>
         <script src="../../JS/logout.js"></script>
         <script src="../../JS/checkAuth.js"></script>
         <script>
@@ -26,6 +27,7 @@
             <button id="btn-sezione1">Sezione 1</button>
             <button id="btn-sezione2">Sezione 2</button>
             <button id="btn-sezione3">Sezione 3</button>
+            <button id="btn-sezione4">Sezione 4</button>
         </div>
     
         <!-- Sezioni -->
@@ -123,6 +125,14 @@
                 <input type="text" id="input-numCivico">
             </div>
             <button id="numCivico" class="btn-update">Salva</button>
+        </div>
+
+        <div id="sezione4" class="sezione">
+            <div class="form-row">
+                <label>Clicca qui per bloccare la tessera (RFID): </label>
+                <span id="db-cartaRFID"></span>
+            </div>
+            <button id="bloccaCarta" class="btn-update">Blocca carta</button>
         </div>
         <div class="navigazione">
             <button id="back">Indietro</button>

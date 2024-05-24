@@ -36,6 +36,10 @@ $("document").ready(function(){
         modificaNumCivico();
     });
 
+    $("#bloccaCarta").click(function(){
+        bloccaCarta();
+    });
+
     function mostraSezione(sezioneId) {
         $(".sezione").hide(); // Nascondi tutte le sezioni
         $(sezioneId).show();  // Mostra la sezione selezionata
@@ -52,6 +56,9 @@ $("document").ready(function(){
     });
     $("#btn-sezione3").click(function() {
         mostraSezione("#sezione3");
+    });
+    $("#btn-sezione4").click(function() {
+        mostraSezione("#sezione4");
     });
 
     caricaInformazioni();
@@ -185,6 +192,7 @@ $("document").ready(function(){
         caricaNomeCognome(elemento["nome"], elemento["cognome"]);
         caricaEmailPswCarta(elemento["email"], elemento["num_carta_credito"]);
         caricaIndirizzo(elemento["via"], elemento["citta"], elemento["cap"], elemento["num_civico"]);
+        caricaRFID(elemento["num_tessera"]);
     }
 
     function caricaNomeCognome(nome, cognome){
@@ -208,5 +216,33 @@ $("document").ready(function(){
         $("#db-citta").text(citta);
         $("#db-cap").text(cap);
         $("#db-numCivico").text(num_civico);
+    }
+
+    function caricaRFID(numRFID){
+        if(numRFID == ""){
+            $("#db-cartaRFID").text("carta già bloccata. L'admin provvederà a generarti un nuovo RFID e inviarti la carta");
+        }
+        else{
+            $("#db-cartaRFID").text("Tessera attiva");
+        }
+    }
+
+    function bloccaCarta(){
+        if($("#db-cartaRFID").text() == "Tessera attiva"){
+            $.post("../../AJAX/bloccaCarta.php", {}, function(data) {
+                if(data["status"] == "success"){
+                    alert("carta bloccata con successo. L'admin provvederà a fornirtene una nuova");
+                    location.reload();
+                }
+                else{
+                    alert("Errore durante la richiesta. Riprova.");
+                }
+            }).fail(function(){
+                alert("Errore di connessione. Riprova.");
+            });
+        }
+        else{
+            alert("carta già bloccata");
+        }
     }
 });
